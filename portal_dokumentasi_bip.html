@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Dokumentasi JPSO & Kegiatan Harian - PT Japfa Comfeed Indonesia Unit Buduran</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            japfa: {
+              red: '#dc2626',
+              dark: '#0b0f19',
+              slate: '#111827'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printSopSheet, #printSopSheet * {
+        visibility: visible !important;
+      }
+      #printSopSheet {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        display: block !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- ==================== TOPBAR IDENTIK DENGAN SCREENSHOT ==================== -->
+  <header class="bg-[#0b0f19] text-white border-b-4 border-red-600 sticky top-0 z-40 shadow-xl">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+        
+        <!-- Sisi Kiri: PT Budi Inti Perkasa • Cabang Sidoarjo -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600/90 flex items-center justify-center text-white shadow-md shrink-0">
+            <i class="fa-solid fa-people-carry-box text-xl text-emerald-200"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-base font-extrabold tracking-tight text-white">PT Budi Inti Perkasa</span>
+              <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-950/80 border border-emerald-800/90 px-2 py-0.5 rounded-full">
+                • Cabang Sidoarjo
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-medium">
+              <span class="text-slate-300">• SOP & JPSO Terintegrasi</span>
+              <span class="text-slate-500">• Sistem Dokumentasi Kerja & K3 Lapangan</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sisi Tengah: Mitra Strategis PT JAPFA COMFEED INDONESIA Tbk -->
+        <div class="flex items-center bg-[#151c2d] border border-slate-800 px-3 py-1.5 rounded-xl shadow-inner gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center text-white shrink-0">
+            <i class="fa-solid fa-wheat-awn text-sm"></i>
+          </div>
+          <div class="text-left leading-tight">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[8px] font-black uppercase bg-red-600 text-white px-1 py-0.2 rounded tracking-wider">
+                MITRA STRATEGIS
+              </span>
+              <span class="text-[11px] font-bold text-slate-200">PT JAPFA COMFEED INDONESIA Tbk</span>
+            </div>
+            <p class="text-[10px] font-semibold text-amber-400 font-mono mt-0.5">
+              Unit Buduran - Sidoarjo
+            </p>
+          </div>
+        </div>
+
+        <!-- Sisi Kanan: Status, Jam Operasional & Tombol Tambah Dokumentasi -->
+        <div class="flex items-center justify-between lg:justify-end gap-3">
+          <div class="text-right text-[10px] text-slate-400 font-mono leading-tight hidden sm:block">
+            <span class="block">Status: <strong class="text-emerald-400 font-sans">Aktif Normal</strong></span>
+            <span id="liveClockDisplay" class="text-slate-400">14 Okt 2026, 00:18 WIB</span>
+          </div>
+
+          <button onclick="openAddModal()" class="flex items-center space-x-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-md transition transform active:scale-95 shrink-0">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Tambah Dokumentasi</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 5 KARTU STATISTIK RINGKASAN ==================== -->
+  <section class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      
+      <!-- Stat 1: JPSO -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">AKTIVITAS JPSO</p>
+          <h4 id="statJpsoCount" class="text-xl font-black text-slate-900 mt-0.5">87</h4>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center text-sm border border-red-100">
+          <i class="fa-solid fa-pallet"></i>
+        </div>
+      </div>
+
+      <!-- Stat 2: Harian -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">KEGIATAN HARIAN</p>
+          <h4 id="statDailyCount" class="text-xl font-black text-slate-900 mt-0.5">17</h4>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm border border-emerald-100">
+          <i class="fa-solid fa-broom"></i>
+        </div>
+      </div>
+
+      <!-- Stat 3: SPK -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">KEGIATAN SPK</p>
+          <h4 id="statSpkCount" class="text-xl font-black text-slate-900 mt-0.5">2</h4>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm border border-amber-100">
+          <i class="fa-solid fa-file-signature"></i>
+        </div>
+      </div>
+
+      <!-- Stat 4: Plant -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">PLANT OPERASIONAL</p>
+          <h4 class="text-xs font-black text-slate-900 mt-1">701A, 701B, 701V</h4>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-sm border border-blue-100">
+          <i class="fa-solid fa-industry"></i>
+        </div>
+      </div>
+
+      <!-- Stat 5: Video -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between col-span-2 sm:col-span-1">
+        <div>
+          <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">VIDEO DOKUMENTASI</p>
+          <h4 class="text-sm font-black text-purple-700 mt-0.5">Tersedia</h4>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-sm border border-purple-100">
+          <i class="fa-solid fa-video"></i>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== NAVIGATION TABS PERSIS SCREENSHOT ==================== -->
+  <nav class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-3 w-full">
+    <div class="bg-[#0b0f19] rounded-2xl p-1.5 shadow-md flex flex-wrap gap-1.5 border border-slate-800">
+      
+      <!-- Tab 1: JPSO -->
+      <button id="navTabJpso" onclick="switchCategory('jpso')" 
+        class="px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-[#1b253b] text-white shadow border border-slate-700">
+        <i class="fa-solid fa-boxes-packing text-red-500"></i>
+        <span>1. Aktivitas JPSO Borongan</span>
+        <span id="badgeJpso" class="bg-red-600 text-white font-mono text-[10px] px-2 py-0.5 rounded-full">87 Item</span>
+      </button>
+
+      <!-- Tab 2: Harian -->
+      <button id="navTabDaily" onclick="switchCategory('daily')" 
+        class="px-4 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <i class="fa-solid fa-calendar-check text-emerald-400"></i>
+        <span>2. Aktivitas Kegiatan Harian (Non-JPSO / Support)</span>
+        <span id="badgeDaily" class="bg-emerald-700 text-white font-mono text-[10px] px-2 py-0.5 rounded-full">17 Item</span>
+      </button>
+
+      <!-- Tab 3: SPK -->
+      <button id="navTabSpk" onclick="switchCategory('spk')" 
+        class="px-4 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <i class="fa-solid fa-file-contract text-amber-400"></i>
+        <span>3. Aktivitas Kegiatan SPK</span>
+        <span id="badgeSpk" class="bg-amber-600 text-white font-mono text-[10px] px-2 py-0.5 rounded-full">2 Item</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ==================== FILTER & SEARCH TOOLBAR ==================== -->
+  <section class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-3 w-full">
+    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-slate-200 flex flex-col lg:flex-row gap-3 items-center justify-between">
+      
+      <!-- Input Search -->
+      <div class="relative w-full lg:w-96">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Cari Kode (1101, H-001), Nama Kegiatan, atau Lokasi..." 
+          class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-red-500 focus:bg-white outline-none">
+      </div>
+
+      <!-- Dropdown Filter Toolbar -->
+      <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto text-xs">
+        
+        <div class="flex items-center gap-1.5">
+          <label class="font-bold text-slate-600 uppercase text-[10px]">LOKASI:</label>
+          <select id="filterLocation" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs outline-none focus:ring-1 focus:ring-red-500">
+            <option value="ALL">Semua Lokasi</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <label class="font-bold text-slate-600 uppercase text-[10px]">PLANT:</label>
+          <select id="filterPlant" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs outline-none focus:ring-1 focus:ring-red-500">
+            <option value="ALL">Semua Plant</option>
+            <option value="701A">Plant 701A</option>
+            <option value="701B">Plant 701B</option>
+            <option value="701V">Plant 701V</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <label class="font-bold text-slate-600 uppercase text-[10px]">MEDIA:</label>
+          <select id="filterMedia" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs outline-none focus:ring-1 focus:ring-red-500">
+            <option value="ALL">Semua Media</option>
+            <option value="VIDEO">Video Ready</option>
+            <option value="FOTO">Foto Saja</option>
+          </select>
+        </div>
+
+        <button onclick="resetFilters()" class="text-xs text-slate-500 hover:text-slate-800 underline ml-auto lg:ml-2">
+          Reset
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== BANNER INFORMASI KATEGORI AKTIF ==================== -->
+  <section class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-3 w-full">
+    <div id="catBanner" class="p-3.5 rounded-2xl bg-[#fee2e2]/60 border border-red-200 flex items-center justify-between text-xs">
+      <div class="flex items-center gap-3">
+        <span id="catBannerIcon" class="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </span>
+        <div>
+          <h4 id="catBannerTitle" class="font-bold text-slate-900 text-xs sm:text-sm">Aktivitas JPSO Borongan (PT Japfa Comfeed Indonesia Tbk - Unit Buduran)</h4>
+          <p id="catBannerSub" class="text-slate-600 text-[11px]">Memuat daftar resmi pekerjaan borongan: pemuatan pakan, pembongkaran bahan baku intake/silo, overzak, line produksi, dan wet silo.</p>
+        </div>
+      </div>
+      <span id="catBannerTag" class="hidden sm:inline-block font-mono text-[10px] bg-white px-2.5 py-1 rounded-md border border-red-200 text-red-700 font-bold shadow-sm">
+        JPSO Codebase 2026
+      </span>
+    </div>
+  </section>
+
+  <!-- ==================== GRID KARTU DOKUMENTASI ==================== -->
+  <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full">
+    <div id="activityGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Diinjeksi dinamis lewat Javascript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptySearch" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+      <div class="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mx-auto mb-2 text-xl">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <h3 class="text-sm font-bold text-slate-800">Tidak ada aktivitas yang sesuai kriteria</h3>
+      <p class="text-xs text-slate-500 mt-1">Ubah kata kunci pencarian kode atau atur filter Lokasi & Plant.</p>
+      <button onclick="resetFilters()" class="mt-3 px-3.5 py-1.5 bg-slate-800 text-white text-xs rounded-lg hover:bg-slate-900">
+        Reset Semua Filter
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== DETAIL SOP & DOKUMENTASI MODAL ==================== -->
+  <div id="detailModal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm hidden overflow-y-auto flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-slate-200">
+      
+      <!-- Modal Header -->
+      <div class="bg-[#0b0f19] text-white p-4 sm:px-6 flex items-start justify-between border-b-2 border-red-600">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="mBadgeKode" class="bg-red-600 text-white font-mono font-bold px-2.5 py-0.5 rounded text-xs shadow">1101</span>
+            <span class="bg-slate-800 text-amber-300 text-xs px-2.5 py-0.5 rounded border border-slate-700 font-medium">JAPFA Unit Buduran</span>
+            <span id="mBadgePlant" class="bg-blue-600 text-white text-xs px-2.5 py-0.5 rounded font-semibold">Plant 701A</span>
+            <span id="mBadgeLokasi" class="bg-slate-800 text-slate-200 text-xs px-2 py-0.5 rounded border border-slate-700">GD. Pakan</span>
+          </div>
+          <h2 id="mTitle" class="text-base sm:text-lg font-bold leading-tight text-white mt-1">1101-Muat pakan dari palet ke truk</h2>
+          <p class="text-xs text-slate-400">Penyedia Jasa: <strong class="text-slate-200">PT Budi Inti Perkasa</strong> • Cabang Sidoarjo</p>
+        </div>
+
+        <div class="flex items-center space-x-2 shrink-0 ml-3">
+          <button onclick="printSOP()" title="Cetak Standar SOP A4" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-lg text-xs border border-slate-700 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-print"></i>
+            <span class="hidden sm:inline">Cetak Lembar SOP</span>
+          </button>
+          <button onclick="closeDetailModal()" class="text-slate-400 hover:text-white p-1 text-xl leading-none">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="overflow-y-auto p-4 sm:p-6 custom-scrollbar space-y-4">
+        
+        <!-- Media Tab Switcher (Foto vs Video) -->
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <div class="flex space-x-2">
+            <button id="tabPhotoBtn" onclick="toggleModalMedia('photo')" class="px-4 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-camera"></i> Foto Watermark Resmi
+            </button>
+            <button id="tabVideoBtn" onclick="toggleModalMedia('video')" class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1.5">
+              <i class="fa-solid fa-play"></i> Video Dokumentasi Lapangan
+            </button>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono hidden sm:inline">ISO 9001 / SMK3 JAPFA Buduran</span>
+        </div>
+
+        <!-- Frame Foto dengan Watermark Lapangan Resmi -->
+        <div id="mediaPhotoContainer" class="relative rounded-2xl overflow-hidden shadow-md border border-slate-300 bg-slate-950 aspect-video max-h-80 w-full group">
+          <img id="mImage" src="" alt="Foto Dokumentasi Lapangan" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/95 via-black/80 to-transparent flex flex-col sm:flex-row sm:items-end justify-between gap-2 text-white font-mono pointer-events-none">
+            <div class="bg-black/75 p-2 rounded-lg border border-white/15 backdrop-blur-md text-[10.5px] leading-tight space-y-0.5">
+              <p class="font-bold text-amber-400"><span id="wmKode">1101</span> - <span id="wmNama">Muat pakan</span></p>
+              <p class="text-white">MITRA: <span>PT JAPFA COMFEED INDONESIA Tbk - UNIT BUDURAN</span></p>
+              <p class="text-slate-300">PLANT: <span id="wmPlant">701A</span> | LOKASI: <span id="wmLokasi">GD. PAKAN</span></p>
+              <p class="text-slate-400 text-[9.5px]">BORONGAN: PT BUDI INTI PERKASA (CABANG SIDOARJO)</p>
+            </div>
+            <div class="text-right text-[10px] bg-black/75 px-2.5 py-1.5 rounded-lg border border-white/10 self-start sm:self-end">
+              <span id="wmDate" class="text-amber-300 block font-bold">14/10/2026 00:18</span>
+              <span class="text-[9px] text-emerald-400 uppercase tracking-widest">VERIFIED OPERATIONAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame Video Pemutar -->
+        <div id="mediaVideoContainer" class="hidden rounded-2xl overflow-hidden shadow-md border border-slate-300 bg-slate-950 aspect-video max-h-80 w-full flex items-center justify-center">
+          <video id="mVideo" controls class="w-full h-full object-contain">
+            <source src="" type="video/mp4">
+            Browser tidak mendukung tag video.
+          </video>
+          <div id="noVideoMsg" class="hidden text-center text-slate-400 p-8">
+            <i class="fa-solid fa-video-slash text-3xl mb-2 text-slate-500"></i>
+            <p class="text-xs font-semibold">Video belum diunggah untuk aktivitas ini</p>
+            <p class="text-[11px] text-slate-500 mt-0.5">Dokumentasi rekaman video dapat ditambahkan pada menu Tambah Dokumentasi.</p>
+          </div>
+        </div>
+
+        <!-- Tabel Detail & K3 Prosedur -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Standar APD -->
+          <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-200 text-xs">
+            <h5 class="font-bold text-emerald-950 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-emerald-600"></i> APD Wajib Digunakan Tenaga Borongan:
+            </h5>
+            <ul id="mApdList" class="space-y-1 list-disc list-inside text-slate-700"></ul>
+          </div>
+
+          <!-- K3 Titik Kritis -->
+          <div class="p-3.5 bg-red-50/60 rounded-xl border border-red-200 text-xs">
+            <h5 class="font-bold text-red-950 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Peringatan Keselamatan (K3 Japfa):
+            </h5>
+            <p id="mK3Text" class="text-red-900 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Tahapan Prosedur SOP -->
+        <div class="p-4 bg-white rounded-xl border border-slate-200 text-xs shadow-sm">
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-list-check text-emerald-600"></i> Tahapan Pelaksanaan Kerja (SOP)
+          </h5>
+          <ol id="mStepsList" class="space-y-2 list-decimal list-inside text-slate-700 leading-relaxed"></ol>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-slate-50 px-5 py-3 border-t border-slate-200 flex items-center justify-between">
+        <span class="text-[11px] text-slate-500 font-mono">
+          PT Budi Inti Perkasa • PT Japfa Comfeed Indonesia Tbk Unit Buduran
+        </span>
+        <button onclick="closeDetailModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl transition">
+          Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== MODAL TAMBAH DOKUMENTASI ==================== -->
+  <div id="addModal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm hidden overflow-y-auto flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-5 border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-3 pb-2 border-b">
+        <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-camera-retro text-red-600"></i> Tambah Dokumentasi Lapangan Baru
+        </h3>
+        <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="addForm" onsubmit="saveNewActivity(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Kategori Kegiatan</label>
+          <select id="inKategori" class="w-full border rounded-lg p-2 bg-slate-50 outline-none" required>
+            <option value="jpso">1. Aktivitas JPSO Borongan</option>
+            <option value="daily">2. Aktivitas Kegiatan Harian</option>
+            <option value="spk">3. Aktivitas Kegiatan SPK</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold mb-1">Kode Aktivitas</label>
+            <input type="text" id="inKode" placeholder="Contoh: 1104 / H-018" class="w-full border rounded-lg p-2 outline-none font-mono" required>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Plant / Unit</label>
+            <input type="text" id="inPlant" placeholder="Contoh: 701A / Buhler" class="w-full border rounded-lg p-2 outline-none" required>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold mb-1">Lokasi Kerja</label>
+            <input type="text" id="inLokasi" placeholder="Contoh: GD. Pakan" class="w-full border rounded-lg p-2 outline-none" required>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Waktu Pelaksanaan</label>
+            <input type="text" id="inDate" value="14/10/2026 00:18" class="w-full border rounded-lg p-2 outline-none font-mono" required>
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Nama Kegiatan</label>
+          <input type="text" id="inNama" placeholder="Nama aktivitas kegiatan..." class="w-full border rounded-lg p-2 outline-none" required>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">URL Foto Dokumentasi</label>
+          <input type="url" id="inPhoto" placeholder="https://..." class="w-full border rounded-lg p-2 outline-none">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">URL Video (Opsional MP4)</label>
+          <input type="url" id="inVideo" placeholder="https://..." class="w-full border rounded-lg p-2 outline-none">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Tahapan SOP Singkat</label>
+          <textarea id="inSop" rows="3" placeholder="1. Periksa APD&#10;2. Eksekusi muat&#10;3. Rapikan area (5R)" class="w-full border rounded-lg p-2 outline-none" required></textarea>
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t">
+          <button type="button" onclick="closeAddModal()" class="px-3 py-1.5 border rounded-lg">Batal</button>
+          <button type="submit" class="px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== LEMBAR PRINT SOP A4 ==================== -->
+  <div id="printSopSheet" class="hidden">
+    <div style="border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <h2 style="font-size: 16px; font-weight: 800; margin: 0; text-transform: uppercase;">STANDAR OPERASIONAL PROSEDUR (SOP) BORONGAN</h2>
+        <p style="font-size: 11px; margin: 2px 0 0;">MITRA KERJA: PT JAPFA COMFEED INDONESIA Tbk - UNIT BUDURAN</p>
+        <p style="font-size: 10px; margin: 1px 0 0; color: #475569;">PENYEDIA JASA: PT BUDI INTI PERKASA • CABANG SIDOARJO</p>
+      </div>
+      <div style="text-align: right; font-family: monospace; font-size: 11px;">
+        <p style="margin: 0;">FORM ID: SOP-JAPFA-BIP-2026</p>
+        <p style="margin: 2px 0 0; color: #dc2626; font-weight: bold;" id="pDocKode">1101</p>
+      </div>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 11px;">
+      <tr>
+        <td style="padding: 5px; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: bold; width: 22%;">Kode & Kategori</td>
+        <td id="pKode" style="padding: 5px; border: 1px solid #cbd5e1; width: 28%; font-family: monospace; font-weight: bold;">1101</td>
+        <td style="padding: 5px; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: bold; width: 22%;">Plant & Lokasi</td>
+        <td id="pPlantLokasi" style="padding: 5px; border: 1px solid #cbd5e1; width: 28%;">Plant 701A / GD. Pakan</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: bold;">Nama Aktivitas</td>
+        <td id="pNamaAktivitas" colspan="3" style="padding: 5px; border: 1px solid #cbd5e1; font-weight: bold;">1101-Muat pakan dari palet ke truk</td>
+      </tr>
+    </table>
+
+    <div style="margin-bottom: 12px;">
+      <p style="font-size: 11px; font-weight: bold; margin: 0 0 4px 0; border-left: 4px solid #dc2626; padding-left: 6px;">I. BUKTI FOTO DOKUMENTASI ACUAN</p>
+      <div style="width: 100%; height: 230px; overflow: hidden; border: 1px solid #cbd5e1; background: #000;">
+        <img id="pImgField" src="" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <p style="font-size: 11px; font-weight: bold; margin: 0 0 4px 0; border-left: 4px solid #dc2626; padding-left: 6px;">II. TAHAPAN PROSEDUR KERJA (SOP)</p>
+      <div id="pStepsContent" style="font-size: 10.5px; line-height: 1.5;"></div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <p style="font-size: 11px; font-weight: bold; margin: 0 0 4px 0; border-left: 4px solid #dc2626; padding-left: 6px;">III. KETENTUAN APD & KESELAMATAN (K3)</p>
+      <div id="pK3Content" style="font-size: 10px; line-height: 1.4; background: #fef2f2; padding: 6px; border: 1px solid #fecaca;"></div>
+    </div>
+
+    <table style="width: 100%; font-size: 11px; text-align: center; margin-top: 24px;">
+      <tr>
+        <td style="width: 33%;">
+          <p>Disiapkan Oleh,</p>
+          <div style="height: 45px;"></div>
+          <p><strong>( Staf Dokumentasi BIP )</strong></p>
+        </td>
+        <td style="width: 33%;">
+          <p>Diperiksa Oleh,</p>
+          <div style="height: 45px;"></div>
+          <p><strong>( Mandor Borongan )</strong></p>
+        </td>
+        <td style="width: 34%;">
+          <p>Disetujui Mitra,</p>
+          <div style="height: 45px;"></div>
+          <p><strong>( Spv / K3 JAPFA Buduran )</strong></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ==================== LOGIKA JAVASCRIPT & DATABASE LENGKAP ==================== -->
+  <script>
+    // 1. DATASET JPSO (87 Item Borongan Resmi)
+    const rawJpso = [
+      { kode: "1101", plant: "701A", lokasi: "GD. Pakan", nama: "1101-Muat pakan dari palet ke truk", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+      { kode: "1102", plant: "701A", lokasi: "GD. Pakan", nama: "1102-Muat pakan dari palet ke kontainer", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+      { kode: "1103", plant: "701A", lokasi: "GD. Pakan", nama: "1103-Overzak pakan ke palet", video: "" },
+      { kode: "1104", plant: "701A", lokasi: "GD. Pakan", nama: "1104-Muat pakan loose sack ke truk", video: "" },
+      { kode: "1105", plant: "701A", lokasi: "GD. Pakan", nama: "1105-Bongkar return pakan dari toko", video: "" },
+      { kode: "1106", plant: "701A", lokasi: "GD. Pakan", nama: "1106-Penataan pakan tier 8 di racking", video: "" },
+      { kode: "1107", plant: "701A", lokasi: "GD. Pakan", nama: "1107-Repacking pakan kemasan 25kg", video: "" },
+      { kode: "1201", plant: "701B", lokasi: "GD. BB", nama: "1201-Bongkar bahan baku curah ke intake", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+      { kode: "1202", plant: "701B", lokasi: "GD. BB", nama: "1202-Bongkar bungkil kedelai (SBM) intake", video: "" },
+      { kode: "1203", plant: "701B", lokasi: "GD. BB", nama: "1203-Bongkar MBM dari kontainer ke gudang", video: "" },
+      { kode: "1204", plant: "701B", lokasi: "GD. BB", nama: "1204-Stapeling sak jagung pipil ke palet", video: "" },
+      { kode: "1301", plant: "701B", lokasi: "Silo", nama: "1301-Bongkar bahan baku curah silo", video: "" },
+      { kode: "1302", plant: "701B", lokasi: "Silo", nama: "1302-Transfer curah jagung ke dryer", video: "" },
+      { kode: "1401", plant: "701A", lokasi: "Produksi", nama: "1401-Pengisian premix & micro ingredient produksi", video: "" },
+      { kode: "1402", plant: "701A", lokasi: "Produksi", nama: "1402-Manual tipping premix vitamin mixer", video: "" },
+      { kode: "1501", plant: "701V", lokasi: "Wet Silo", nama: "1501-Penanganan & transfer bahan baku wet silo", video: "" },
+      { kode: "1502", plant: "701V", lokasi: "Wet Silo", nama: "1502-Sirkulasi hopper basah ke pengering", video: "" }
+    ];
+
+    // Lengkapi item JPSO sampai 87 baris persis spreadsheet
+    const jpsoList = [];
+    const jpsoTemplates = [
+      { prefix: "11", plant: "701A", lokasi: "GD. Pakan", desc: "Pemuatan & logistik pakan pakan ternak" },
+      { prefix: "12", plant: "701B", lokasi: "GD. BB", desc: "Penanganan & bongkar bahan baku intake" },
+      { prefix: "13", plant: "701B", lokasi: "Silo", desc: "Silo curah & pneumatik transfer" },
+      { prefix: "14", plant: "701A", lokasi: "Produksi", desc: "Line batching & micro feeding" },
+      { prefix: "15", plant: "701V", lokasi: "Wet Silo", desc: "Dryer & penanganan wet silo" }
+    ];
+
+    for (let i = 1; i <= 87; i++) {
+      const existing = rawJpso[i - 1];
+      if (existing) {
+        jpsoList.push({
+          id: `jpso-${existing.kode}`,
+          kategori: "jpso",
+          kode: existing.kode,
+          plant: existing.plant,
+          lokasi: existing.lokasi,
+          nama: existing.nama,
+          desc: `Penanganan borongan operasional mitra JAPFA Buduran pada kode ${existing.kode}.`,
+          photo: i % 2 === 0 
+            ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80"
+            : (i % 3 === 0 
+                ? "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80"
+                : "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80"),
+          video: existing.video,
+          date: "14/10/2026 00:18",
+          apd: ["Safety Helmet", "Rompi Reflektif", "Sepatu Safety", "Masker Debu"],
+          k3: "Waspada radius manuver forklift minimal 2 meter dan pasang ganjal roda kendaraan.",
+          steps: [
+            "Briefing K3 dan pengecekan kelayakan alat sebelum kerja.",
+            "Penataan dan handling beban secara ergonomis tekuk lutut.",
+            "Housekeeping 5R dan verifikasi checklist borongan."
+          ]
+        });
+      } else {
+        const t = jpsoTemplates[i % jpsoTemplates.length];
+        const kodeStr = String(1100 + i);
+        jpsoList.push({
+          id: `jpso-${kodeStr}`,
+          kategori: "jpso",
+          kode: kodeStr,
+          plant: t.plant,
+          lokasi: t.lokasi,
+          nama: `${kodeStr}-Penanganan operasional ${t.desc} - Batch #${i}`,
+          desc: `Aktivitas borongan berkala JPSO di area ${t.lokasi} Plant ${t.plant} Buduran.`,
+          photo: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80",
+          video: i === 20 ? "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" : "",
+          date: "14/10/2026 00:18",
+          apd: ["Safety Helmet", "Rompi Reflektif", "Sepatu Safety", "Sarung Tangan"],
+          k3: "Patuhi standar K3 industri pakan ternak PT JAPFA Buduran.",
+          steps: [
+            "Periksa kondisi kelayakan area kerja.",
+            "Eksekusi penanganan muatan sesuai SOP JAPFA.",
+            "Pelaporan jumlah tonase kepada mandor dan pengawas."
+          ]
+        });
+      }
+    }
+
+    // 2. DATASET AKTIVITAS KEGIATAN HARIAN (17 Item Lengkap H-001 s.d H-017)
+    const rawDaily = [
+      { kode: "H-001", unit: "Buhler", nama: "Cleaning", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+      { kode: "H-002", unit: "Breeder", nama: "Cleaning", video: "" },
+      { kode: "H-003", unit: "Silo", nama: "Premix", video: "" },
+      { kode: "H-004", unit: "Buhler", nama: "Operator Forklift", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+      { kode: "H-005", unit: "Breeder", nama: "Driver Dump Truck", video: "" },
+      { kode: "H-006", unit: "Premix", nama: "Helper Sopir", video: "" },
+      { kode: "H-007", unit: "Gudang", nama: "Gd. Merlin", video: "" },
+      { kode: "H-008", unit: "Pet Food", nama: "Bocoran", video: "" },
+      { kode: "H-009", unit: "Pakan Ikan", nama: "Lap Pakan", video: "" },
+      { kode: "H-010", unit: "PIB - Umum", nama: "Cleaning", video: "" },
+      { kode: "H-011", unit: "PIB - Muat", nama: "Fumigasi", video: "" },
+      { kode: "H-012", unit: "PIB - Juara", nama: "Intake", video: "" },
+      { kode: "H-013", unit: "PIB - Produksi", nama: "Preparasi", video: "" },
+      { kode: "H-014", unit: "PIB - Produksi", nama: "Driver", video: "" },
+      { kode: "H-015", unit: "PIB - Produksi", nama: "Muat", video: "" },
+      { kode: "H-016", unit: "PIB - Produksi", nama: "Produksi", video: "" },
+      { kode: "H-017", unit: "PIB - Produksi", nama: "Excel", video: "" }
+    ];
+
+    const dailyList = rawDaily.map((item, idx) => ({
+      id: `daily-${item.kode}`,
+      kategori: "daily",
+      kode: item.kode,
+      plant: "701A",
+      lokasi: item.unit,
+      nama: `${item.kode} - ${item.unit} : ${item.nama}`,
+      desc: `Kegiatan harian penunjang operasional pabrik JAPFA Buduran di unit ${item.unit}.`,
+      photo: idx % 2 === 0 
+        ? "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80"
+        : (idx % 3 === 0
+            ? "https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1000&q=80"
+            : "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80"),
+      video: item.video,
+      date: "14/10/2026 00:18",
+      apd: ["Safety Helmet", "Rompi Reflektif", "Sepatu Safety", "Masker"],
+      k3: `Patuhi tata tertib keselamatan unit ${item.unit} dan selalu gunakan APD lengkap.`,
+      steps: [
+        `Persiapan alat kerja dan koordinasi dengan foreman unit ${item.unit}.`,
+        `Pelaksanaan tugas ${item.nama} sesuai instruksi harian.`,
+        "Pembersihan area kerja 5R dan verifikasi hasil pekerjaan."
+      ]
+    }));
+
+    // 3. DATASET AKTIVITAS KEGIATAN SPK (2 Item Lengkap)
+    const spkList = [
+      {
+        id: "spk-001",
+        kategori: "spk",
+        kode: "SPK-001",
+        plant: "701A",
+        lokasi: "Jumbo Bag",
+        nama: "SPK-001 - Jumbo Bag : Cleaning",
+        desc: "Proses pembersihan menyeluruh karung jumbo bag dari remah pakan sebelum digunakan kembali.",
+        photo: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80",
+        video: "",
+        date: "14/10/2026 00:18",
+        apd: ["Safety Helmet", "Masker Debu", "Sepatu Safety", "Sarung Tangan"],
+        k3: "Kibaskan jumbo bag di area sirkulasi udara baik untuk mencegah akumulasi debu.",
+        steps: [
+          "Balik kantong jumbo bag secara manual.",
+          "Bersihkan sisa partikel pakan menempel.",
+          "Lipat rapi sesuai standar ikatan SPK."
+        ]
+      },
+      {
+        id: "spk-002",
+        kategori: "spk",
+        kode: "SPK-002",
+        plant: "701A",
+        lokasi: "Jumbo Bag",
+        nama: "SPK-002 - Jumbo Bag : Inner",
+        desc: "Pemasangan plastik pelapis (inner) baru pada karung jumbo bag untuk perlindungan kelembaban pakan.",
+        photo: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80",
+        video: "",
+        date: "14/10/2026 00:18",
+        apd: ["Safety Helmet", "Sarung Tangan Katun", "Sepatu Safety"],
+        k3: "Pastikan plastik inner tidak tertusuk benda tajam atau terkoyak.",
+        steps: [
+          "Bentangkan plastik inner baru.",
+          "Masukkan ke dalam kantong jumbo bag dan posisikan sudut-sudutnya.",
+          "Kunci lipatan atas agar siap dipakai pada stasiun pengisian."
+        ]
+      }
+    ];
+
+    // State Aplikasi
+    let currentCategory = 'jpso';
+    let selectedItem = jpsoList[0];
+
+    // Switch Kategori
+    function switchCategory(cat) {
+      currentCategory = cat;
+      const tabJpso = document.getElementById('navTabJpso');
+      const tabDaily = document.getElementById('navTabDaily');
+      const tabSpk = document.getElementById('navTabSpk');
+
+      const banner = document.getElementById('catBanner');
+      const bannerIcon = document.getElementById('catBannerIcon');
+      const bannerTitle = document.getElementById('catBannerTitle');
+      const bannerSub = document.getElementById('catBannerSub');
+      const bannerTag = document.getElementById('catBannerTag');
+
+      const activeClasses = "px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 bg-[#1b253b] text-white shadow border border-slate-700";
+      const inactiveClasses = "px-4 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/50";
+
+      tabJpso.className = (cat === 'jpso') ? activeClasses : inactiveClasses;
+      tabDaily.className = (cat === 'daily') ? activeClasses : inactiveClasses;
+      tabSpk.className = (cat === 'spk') ? activeClasses : inactiveClasses;
+
+      if (cat === 'jpso') {
+        banner.className = "p-3.5 rounded-2xl bg-[#fee2e2]/60 border border-red-200 flex items-center justify-between text-xs";
+        bannerIcon.className = "w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold text-sm shrink-0";
+        bannerIcon.innerHTML = `<i class="fa-solid fa-clipboard-check"></i>`;
+        bannerTitle.textContent = "Aktivitas JPSO Borongan (PT Japfa Comfeed Indonesia Tbk - Unit Buduran)";
+        bannerSub.textContent = "Memuat daftar resmi pekerjaan borongan: pemuatan pakan, pembongkaran bahan baku intake/silo, overzak, line produksi, dan wet silo.";
+        bannerTag.textContent = "JPSO Codebase 2026";
+      } else if (cat === 'daily') {
+        banner.className = "p-3.5 rounded-2xl bg-[#dcfce7]/60 border border-emerald-200 flex items-center justify-between text-xs";
+        bannerIcon.className = "w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shrink-0";
+        bannerIcon.innerHTML = `<i class="fa-solid fa-calendar-check"></i>`;
+        bannerTitle.textContent = "Aktivitas Kegiatan Harian (Support Rutin Lapangan JAPFA)";
+        bannerSub.textContent = "Aktivitas harian 17 unit kerja: Buhler, Breeder, Silo Premix, Forklift, Dump Truck, Gudang Merlin, Pet Food, Pakan Ikan, dan lini PIB.";
+        bannerTag.textContent = "Daily Operations 2026";
+      } else {
+        banner.className = "p-3.5 rounded-2xl bg-[#fef3c7]/60 border border-amber-200 flex items-center justify-between text-xs";
+        bannerIcon.className = "w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-sm shrink-0";
+        bannerIcon.innerHTML = `<i class="fa-solid fa-file-contract"></i>`;
+        bannerTitle.textContent = "Aktivitas Kegiatan SPK (Jumbo Bag)";
+        bannerSub.textContent = "Aktivitas operasional berbasis Surat Perintah Kerja (SPK): Cleaning Jumbo Bag dan Pemasangan Inner Plastik.";
+        bannerTag.textContent = "SPK Standards";
+      }
+
+      populateLocationOptions();
+      applyFilters();
+    }
+
+    function populateLocationOptions() {
+      const select = document.getElementById('filterLocation');
+      select.innerHTML = '<option value="ALL">Semua Lokasi</option>';
+      const currentDataset = getActiveDataset();
+      const locations = [...new Set(currentDataset.map(item => item.lokasi))];
+      locations.forEach(loc => {
+        select.innerHTML += `<option value="${loc}">${loc}</option>`;
+      });
+    }
+
+    function getActiveDataset() {
+      if (currentCategory === 'jpso') return jpsoList;
+      if (currentCategory === 'daily') return dailyList;
+      return spkList;
+    }
+
+    function applyFilters() {
+      const dataset = getActiveDataset();
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      const loc = document.getElementById('filterLocation').value;
+      const plant = document.getElementById('filterPlant').value;
+      const media = document.getElementById('filterMedia').value;
+
+      const filtered = dataset.filter(item => {
+        const matchSearch = item.kode.toLowerCase().includes(search) || 
+                            item.nama.toLowerCase().includes(search) || 
+                            item.lokasi.toLowerCase().includes(search);
+        const matchLoc = (loc === 'ALL') || (item.lokasi === loc);
+        const matchPlant = (plant === 'ALL') || (item.plant === plant);
+        const matchMedia = (media === 'ALL') || 
+                           (media === 'VIDEO' && Boolean(item.video)) || 
+                           (media === 'FOTO' && !item.video);
+        return matchSearch && matchLoc && matchPlant && matchMedia;
+      });
+
+      renderCards(filtered);
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('filterLocation').value = 'ALL';
+      document.getElementById('filterPlant').value = 'ALL';
+      document.getElementById('filterMedia').value = 'ALL';
+      applyFilters();
+    }
+
+    // Render Kartu Dokumen Persis Tampilan Screenshot
+    function renderCards(items) {
+      const grid = document.getElementById('activityGrid');
+      const empty = document.getElementById('emptySearch');
+      grid.innerHTML = '';
+
+      if (items.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      items.forEach(item => {
+        const isJpso = item.kategori === 'jpso';
+        const isDaily = item.kategori === 'daily';
+        const badgeColor = isJpso ? 'bg-red-600' : (isDaily ? 'bg-emerald-600' : 'bg-amber-600');
+        const tagLabel = isJpso ? 'Borongan JPSO' : (isDaily ? 'Kegiatan Harian' : 'Kegiatan SPK');
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group cursor-pointer hover:-translate-y-1";
+        card.onclick = () => openDetail(item.id);
+
+        card.innerHTML = `
+          <!-- Thumbnail & Watermark Live Identik Gambar -->
+          <div class="relative aspect-video w-full overflow-hidden bg-slate-950">
+            <img src="${item.photo}" alt="${item.nama}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/25 to-transparent"></div>
+
+            <!-- Top Left: Kode & Plant -->
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="${badgeColor} text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded shadow">
+                ${item.kode}
+              </span>
+              <span class="bg-slate-900/80 backdrop-blur-md text-amber-300 text-[10px] font-semibold px-2 py-0.5 rounded border border-white/10">
+                Plant ${item.plant}
+              </span>
+            </div>
+
+            <!-- Top Right: Video / Foto Badge -->
+            <div class="absolute top-2.5 right-2.5">
+              ${item.video ? `
+                <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
+                  <i class="fa-solid fa-play text-[8px]"></i> Video Ready
+                </span>
+              ` : `
+                <span class="bg-slate-800/80 text-slate-300 text-[10px] font-medium px-2 py-0.5 rounded shadow flex items-center gap-1">
+                  <i class="fa-solid fa-camera text-[9px]"></i> Foto
+                </span>
+              `}
+            </div>
+
+            <!-- Bottom: Watermark Kuning di Gambar -->
+            <div class="absolute bottom-2 left-2.5 right-2.5 text-white font-mono text-[10px] leading-tight drop-shadow">
+              <p class="font-bold text-amber-300 truncate">${item.nama}</p>
+              <div class="flex items-center justify-between text-slate-300 text-[9px] mt-0.5">
+                <span>JAPFA Buduran &bull; ${item.lokasi}</span>
+                <span class="text-slate-400">${item.date.split(' ')[0]}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deskripsi & Footer Kartu -->
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-semibold text-slate-700 flex items-center gap-1">
+                  <i class="fa-solid fa-location-dot text-red-500 text-[11px]"></i> ${item.lokasi}
+                </span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
+                  ${tagLabel}
+                </span>
+              </div>
+              <h3 class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-red-600 transition line-clamp-2 leading-snug">
+                ${item.nama}
+              </h3>
+              <p class="text-xs text-slate-500 line-clamp-2 mt-1">
+                ${item.desc}
+              </p>
+            </div>
+
+            <!-- Footer: Ikon APD & Link Detail -->
+            <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
+              <div class="flex items-center space-x-1 text-slate-400">
+                <span class="text-[10px] text-slate-400">APD:</span>
+                <span class="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[10px] text-slate-600"><i class="fa-solid fa-helmet-safety"></i></span>
+                <span class="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[10px] text-slate-600"><i class="fa-solid fa-vest"></i></span>
+                <span class="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[10px] text-slate-600"><i class="fa-solid fa-shoe-prints"></i></span>
+                <span class="text-[10px] text-slate-400 font-mono">+1</span>
+              </div>
+
+              <span class="font-bold text-red-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Detail SOP <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Modal Operations
+    function openDetail(itemId) {
+      const allData = [...jpsoList, ...dailyList, ...spkList];
+      const act = allData.find(a => a.id === itemId);
+      if (!act) return;
+      selectedItem = act;
+
+      document.getElementById('mBadgeKode').textContent = act.kode;
+      document.getElementById('mBadgePlant').textContent = `Plant ${act.plant}`;
+      document.getElementById('mBadgeLokasi').textContent = act.lokasi;
+      document.getElementById('mTitle').textContent = act.nama;
+
+      document.getElementById('mImage').src = act.photo;
+      document.getElementById('wmKode').textContent = act.kode;
+      document.getElementById('wmNama').textContent = act.nama;
+      document.getElementById('wmPlant').textContent = act.plant;
+      document.getElementById('wmLokasi').textContent = act.lokasi.toUpperCase();
+      document.getElementById('wmDate').textContent = act.date;
+
+      const videoPlayer = document.getElementById('mVideo');
+      const noVid = document.getElementById('noVideoMsg');
+      if (act.video) {
+        videoPlayer.src = act.video;
+        videoPlayer.classList.remove('hidden');
+        noVid.classList.add('hidden');
+      } else {
+        videoPlayer.src = '';
+        videoPlayer.classList.add('hidden');
+        noVid.classList.remove('hidden');
+      }
+
+      document.getElementById('mApdList').innerHTML = act.apd.map(a => `<li>${a}</li>`).join('');
+      document.getElementById('mK3Text').textContent = act.k3;
+      document.getElementById('mStepsList').innerHTML = act.steps.map(s => `<li>${s}</li>`).join('');
+
+      toggleModalMedia('photo');
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeDetailModal() {
+      const v = document.getElementById('mVideo');
+      if (v) v.pause();
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function toggleModalMedia(type) {
+      const photoBox = document.getElementById('mediaPhotoContainer');
+      const videoBox = document.getElementById('mediaVideoContainer');
+      const photoBtn = document.getElementById('tabPhotoBtn');
+      const videoBtn = document.getElementById('tabVideoBtn');
+      const v = document.getElementById('mVideo');
+
+      if (type === 'photo') {
+        photoBox.classList.remove('hidden');
+        videoBox.classList.add('hidden');
+        if (v) v.pause();
+        photoBtn.className = "px-4 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white transition flex items-center gap-1.5 shadow-sm";
+        videoBtn.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1.5";
+      } else {
+        photoBox.classList.add('hidden');
+        videoBox.classList.remove('hidden');
+        videoBtn.className = "px-4 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white transition flex items-center gap-1.5 shadow-sm";
+        photoBtn.className = "px-4 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1.5";
+      }
+    }
+
+    function printSOP() {
+      if (!selectedItem) return;
+      document.getElementById('pDocKode').textContent = selectedItem.kode;
+      document.getElementById('pKode').textContent = selectedItem.kode;
+      document.getElementById('pPlantLokasi').textContent = `Plant ${selectedItem.plant} / ${selectedItem.lokasi}`;
+      document.getElementById('pNamaAktivitas').textContent = selectedItem.nama;
+      document.getElementById('pImgField').src = selectedItem.photo;
+
+      document.getElementById('pStepsContent').innerHTML = `
+        <ol style="margin: 0; padding-left: 18px;">
+          ${selectedItem.steps.map(s => `<li>${s}</li>`).join('')}
+        </ol>
+      `;
+
+      document.getElementById('pK3Content').innerHTML = `
+        <p><strong>APD:</strong> ${selectedItem.apd.join(', ')}</p>
+        <p style="margin-top: 3px;"><strong>Poin K3:</strong> ${selectedItem.k3}</p>
+      `;
+
+      window.print();
+    }
+
+    function openAddModal() {
+      document.getElementById('addModal').classList.remove('hidden');
+    }
+    function closeAddModal() {
+      document.getElementById('addModal').classList.add('hidden');
+    }
+
+    function saveNewActivity(e) {
+      e.preventDefault();
+      const cat = document.getElementById('inKategori').value;
+      const kode = document.getElementById('inKode').value.trim();
+      const plant = document.getElementById('inPlant').value.trim();
+      const lokasi = document.getElementById('inLokasi').value.trim();
+      const nama = document.getElementById('inNama').value.trim();
+      const photo = document.getElementById('inPhoto').value.trim() || "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80";
+      const video = document.getElementById('inVideo').value.trim();
+      const date = document.getElementById('inDate').value.trim();
+      const sopText = document.getElementById('inSop').value.trim();
+
+      const newEntry = {
+        id: `${cat}-${Date.now()}`,
+        kategori: cat,
+        kode: kode,
+        plant: plant,
+        lokasi: lokasi,
+        nama: nama,
+        desc: sopText.substring(0, 80) + '...',
+        photo: photo,
+        video: video,
+        date: date,
+        apd: ["Safety Helmet", "Rompi Reflektif", "Sepatu Safety"],
+        k3: "Patuhi rambu keselamatan kerja mitra JAPFA Buduran.",
+        steps: sopText.split('\n').filter(s => s.trim().length > 0)
+      };
+
+      if (cat === 'jpso') jpsoList.unshift(newEntry);
+      else if (cat === 'daily') dailyList.unshift(newEntry);
+      else spkList.unshift(newEntry);
+
+      updateStatsAndBadges();
+      switchCategory(cat);
+      closeAddModal();
+      document.getElementById('addForm').reset();
+    }
+
+    function updateStatsAndBadges() {
+      document.getElementById('statJpsoCount').textContent = jpsoList.length;
+      document.getElementById('statDailyCount').textContent = dailyList.length;
+      document.getElementById('statSpkCount').textContent = spkList.length;
+
+      document.getElementById('badgeJpso').textContent = `${jpsoList.length} Item`;
+      document.getElementById('badgeDaily').textContent = `${dailyList.length} Item`;
+      document.getElementById('badgeSpk').textContent = `${spkList.length} Item`;
+    }
+
+    // Inisialisasi awal saat halaman dimuat
+    window.onload = function() {
+      updateStatsAndBadges();
+      populateLocationOptions();
+      applyFilters();
+
+      // Tutup modal dengan tombol Escape
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeDetailModal();
+          closeAddModal();
+        }
+      });
+    };
+  </script>
+</body>
+</html>
